@@ -5,7 +5,7 @@
   require "class/Equipe.php";
 
   $equipe = new Equipe();
-  // $equipes= $equipe->liste();
+  $equipes= $equipe->liste();
   $rencontre = new Rencontre();
   $rencontres =  $rencontre->liste();
   $competition = new DBM('Competition');
@@ -32,6 +32,7 @@
         <form class="col s12" action="app.php" method="post">
           <div class="col s6">
             <div class="input-field col s6">
+              <label for="selectEquipe1">Equipe recevant</label>
               <select  id= "selectEquipe1" name="rencontres[equipe1]">
                 <option value="0">Sélectionnez une équipe</option>
                 <?php foreach ($rencontres as $rencontre): ?>
@@ -47,7 +48,8 @@
           </div>
           <div class="col s6">
             <div class="input-field col s6">
-              <select  id= "selectEquipe1" name="rencontres[equipe2]">
+              <label for="selectEquipe2">Equipe reçue</label>
+              <select  id= "selectEquipe2" name="rencontres[equipe2]">
                 <option value="0">Sélectionnez une équipe</option>
                 <?php foreach ($rencontres as $rencontre): ?>
                   <option value="<?php echo $rencontre->getId(); ?>"><?php echo $rencontre->getEquipe2(); ?></option>
