@@ -15,13 +15,13 @@
     }
 
     public function findAll(){
-      $object[];
+      $object = [];
       $request= "SELECT * FROM {$this->classname} ";
       $results= $this->_db->query($request);
-      while($data = $results->fetch(PDO:FETCH_ASSOC) ){
+      while($data = $results->fetch(PDO::FETCH_ASSOC) ){
         $object[] = new $classname($data);
       }
-      return $object[];
+      return $object;
     }
 
     public function findById($id){
