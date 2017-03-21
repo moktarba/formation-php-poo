@@ -10,18 +10,28 @@
       }
     }
     public function __construct($classname){
-      $this->setDb('mysql:host=localhost; dbname=formation-php-poo', 'root','');
+      $this->setDb(new PDO('mysql:host=localhost; dbname=formation-php-poo', 'root',''));
       $this->_classname= $classname;
     }
 
     public function findAll(){
       $object = [];
-      $request= "SELECT * FROM {$this->classname} ";
+      $request= "SELECT * FROM {$this->_classname} ";
       $results= $this->_db->query($request);
       while($data = $results->fetch(PDO::FETCH_ASSOC) ){
-        $object[] = new $classname($data);
+        $object[] = new $this->_classname($data);
       }
       return $object;
+    }
+
+    public function findAllByColumn($column, $id){
+      $objects;
+      $request = 'SELECT * FROM {column} where id={id}';
+      $res = $this->_db->query($request);
+      while($donnees = $res->fetch(PDO::FETCH_ASSOC)){
+        $objects[] = new $this->_classname($donnees);
+      }
+      return objects;
     }
 
     public function findById($id){
