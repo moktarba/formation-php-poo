@@ -1,6 +1,8 @@
 <?php
   require 'loader.php';
 
+  $equipe = new Equipe();
+  $equipes= $equipe->liste();
   $rencontre = new Rencontre();
   $rencontres= $rencontre->liste();
   // print_r($rencontres);
@@ -70,6 +72,38 @@
                 </div>
               </div>
             </form>
+        <form class="col s12" action="app.php" method="post">
+          <div class="col s6">
+            <div class="input-field col s6">
+              <label for="selectEquipe1">Equipe recevant</label>
+              <select  id= "selectEquipe1" name="rencontres[equipe1]">
+                <option value="0">Sélectionnez une équipe</option>
+                <?php foreach ($rencontres as $rencontre): ?>
+                  <option value="<?php echo $rencontre->getId(); ?>"><?php echo $rencontre->getEquipe1(); ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="input-field col s4">
+              <label for="ScoreEquipe1">Score</label><br>
+              <input type="text" id="ScoreEquipe1" disabled value="0">
+              <input type="hidden" id="ScoreHidden" name="rencontres[score1]" >
+            </div>
+          </div>
+          <div class="col s6">
+            <div class="input-field col s6">
+              <label for="selectEquipe2">Equipe reçue</label>
+              <select  id= "selectEquipe2" name="rencontres[equipe2]">
+                <option value="0">Sélectionnez une équipe</option>
+                <?php foreach ($rencontres as $rencontre): ?>
+                  <option value="<?php echo $rencontre->getId(); ?>"><?php echo $rencontre->getEquipe2(); ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="input-field col s4">
+              <label for="ScoreEquipe2">Score</label><br>
+              <input type="text" id="ScoreEquipe2" disabled value="0">
+              <input type="hidden" id="ScoreHidden" name="rencontres[score2]" >
+            </div>
           </div>
       </div>
     </div>

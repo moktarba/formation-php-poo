@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 
   class Equipe{
     private $_id;
@@ -17,6 +18,40 @@
         $this->setAnneeDeCreation($donnees['annee_de_creation']);
       }
 
+    }
+
+    public function getJoueurs()
+    {
+      $joueurs = [];
+
+      $requete = 'SELECT * FROM joueur WHERE equipe = :id';
+      $prepare = $this->db->prepare($requete);
+      $prepare->bindValue(':id', $this->getId());
+      $prepare->execute();
+
+      while($donnees = $prepare->fetch(PDO::FETCH_ASSOC)) {
+        $joueurs[] = new Joueur($donnees);
+      }
+
+      return $joueurs;
+    }
+    public function getButs()
+    {
+      $buts = [];
+
+      $requete = 'SELECT * FROM but, rencontre, joueur WHERE equipe = :id
+      AND but.joueur = joueur.id
+      AND but.rencontre = rencontre.id
+      ';
+      $prepare = $this->db->prepare($requete);
+      $prepare->bindValue(':id', $this->getId());
+      $prepare->execute();
+
+      while($donnees = $prepare->fetch(PDO::FETCH_ASSOC)) {
+        $joueurs[] = new But($donnees);
+      }
+
+      return $buts;
     }
 
     public function liste()
@@ -61,5 +96,3 @@
       $this->_db = $db;
     }
   }
-
- ?>
